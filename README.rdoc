@@ -1,2 +1,2 @@
 == README
-<a href="https://evening-hamlet-3014.herokuapp.com/breweries">Sample application</a>
+<a href='https://evening-hamlet-3014.herokuapp.com/breweries'>Sample application</a>
