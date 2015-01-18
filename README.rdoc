@@ -1,2 +1,3 @@
 == README
-[Sample application](https://evening-hamlet-3014.herokuapp.com/breweries)
+
+{Sample application}[https://evening-hamlet-3014.herokuapp.com/breweries]
