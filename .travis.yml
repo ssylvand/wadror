@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+- 2.2.0
+script:
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
+deploy:
+  provider: heroku
+  api_key:
+    secure: ZJKV6KGASyVQZi1DVrFTlhbjDVoiA/0JeQ1X/uFchmQF+oI/0hk7DkGefklnblwWKySeCxmkV2I1a1+35I/dCbf3w4ww+e85xqgBUtZrpCU3OWOkboDyvdVYJeq/oMGYJPAy6KHDlxSH/UUYJxxnqdaZm3WZsElkTqh1qxfPHuA=
+  run: "rake db:migrate"
+  app: evening-hamlet-3014
+  on:
+    repo: ssylvand/wadror

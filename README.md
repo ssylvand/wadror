@@ -1,0 +1,2 @@
+[![Build Status](https://travis-ci.org/ssylvand/wadror-public.png)](https://travis-ci.org/ssylvand/wadror-public)
+[![Code Climate](https://codeclimate.com/github/ssylvand/wadror-public.png)](https://codeclimate.com/github/ssylvand/wadror-public)

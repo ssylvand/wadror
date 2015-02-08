@@ -13,4 +13,9 @@ class User < ActiveRecord::Base
   validates :password,
             length: {minimum: 4},
             format: {with: /^(?=.*\d)(?=.*[A-Z]).*$/, multiline: true, message: "needs to contain at least 1 capital letter and 1 digit"}
+
+  def favorite_beer
+    return nil if ratings.empty?
+    ratings.order(score: :desc).limit(1).first.beer
+  end
 end
