@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "with a proper password" do
-    let(:user){ FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.create(:user) }
 
     it "is saved" do
       expect(user).to be_valid
@@ -44,7 +44,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "favorite beer" do
-    let(:user){FactoryGirl.create(:user) }
+    let(:user) { FactoryGirl.create(:user) }
 
     it "has method for determining one" do
       expect(user).respond_to? :favorite_beer
@@ -56,7 +56,7 @@ RSpec.describe User, type: :model do
 
     it "is the only rated if only one rating" do
       beer = FactoryGirl.create(:beer)
-      rating = FactoryGirl.create(:rating, beer:beer, user:user)
+      rating = FactoryGirl.create(:rating, beer: beer, user: user)
 
       expect(user.favorite_beer).to eq(beer)
     end
@@ -68,6 +68,60 @@ RSpec.describe User, type: :model do
       expect(user.favorite_beer).to eq(best)
     end
   end
+
+  describe "favorite style" do
+    let(:user) { FactoryGirl.create(:user) }
+    it "has method for determining one" do
+      expect(user).respond_to? :favorite_style
+    end
+
+    it "without ratings does not have one" do
+      expect(user.favorite_style).to eq(nil)
+    end
+
+    it "is the only rated if only one rating" do
+      beer = FactoryGirl.create(:beer)
+      rating = FactoryGirl.create(:rating, beer: beer, user: user)
+
+      expect(user.favorite_style).to eq(beer.style)
+    end
+
+    it "is the one with highest ratings if several rated" do
+      beer1 = FactoryGirl.create(:beer, style: "Style1")
+      beer2 = FactoryGirl.create(:beer, style: "Style2")
+      create_ratings_for_beer(1, 2, 3, beer1, user)
+      create_ratings_for_beer(4, 5, 6, beer2, user)
+      expect(user.favorite_style).to eq(beer2.style)
+    end
+  end
+  describe "favorite brewery" do
+    let(:user) { FactoryGirl.create(:user) }
+    it "has method for determining one" do
+      expect(user).respond_to? :favorite_brewery
+    end
+
+    it "without ratings does not have one" do
+      expect(user.favorite_brewery).to eq(nil)
+    end
+
+    it "is the only rated if only one rating" do
+      beer = FactoryGirl.create(:beer)
+      rating = FactoryGirl.create(:rating, beer: beer, user: user)
+
+      expect(user.favorite_brewery).to eq(beer.brewery)
+    end
+
+    it "is the one with highest ratings if several rated" do
+      brewery1 = FactoryGirl.create(:brewery, name: "Brewery1")
+      brewery2 = FactoryGirl.create(:brewery, name: "Brewery2")
+      beer1 = FactoryGirl.create(:beer, brewery: brewery1)
+      beer2 = FactoryGirl.create(:beer, brewery: brewery2)
+      create_ratings_for_beer(1, 2, 3, beer1, user)
+      create_ratings_for_beer(4, 5, 6, beer2, user)
+      expect(user.favorite_brewery).to eq(beer2.brewery)
+    end
+  end
+
 end
 
 def create_beers_with_ratings(*scores, user)
@@ -78,6 +132,6 @@ end
 
 def create_beer_with_rating(score, user)
   beer = FactoryGirl.create(:beer)
-  FactoryGirl.create(:rating, score:score, beer:beer, user:user)
+  FactoryGirl.create(:rating, score: score, beer: beer, user: user)
   beer
 end
