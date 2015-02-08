@@ -494,14 +494,6 @@
         1,
         0,
         null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        0,
-        null,
-        null,
         null
       ],
       "/Users/samusylvander/Source/Ruby/ratebeer/app/controllers/memberships_controller.rb": [
@@ -625,6 +617,6 @@
         null
       ]
     },
-    "timestamp": 1423428547
+    "timestamp": 1423432235
   }
 }
