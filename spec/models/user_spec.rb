@@ -87,8 +87,10 @@ RSpec.describe User, type: :model do
     end
 
     it "is the one with highest ratings if several rated" do
-      beer1 = FactoryGirl.create(:beer, style: "Style1")
-      beer2 = FactoryGirl.create(:beer, style: "Style2")
+      style1 = FactoryGirl.create(:style, style: "Style1")
+      style2 = FactoryGirl.create(:style, style: "Style2")
+      beer1 = FactoryGirl.create(:beer, style: style1)
+      beer2 = FactoryGirl.create(:beer, style: style2)
       create_ratings_for_beer(1, 2, 3, beer1, user)
       create_ratings_for_beer(4, 5, 6, beer2, user)
       expect(user.favorite_style).to eq(beer2.style)

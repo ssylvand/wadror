@@ -3,6 +3,7 @@ include OwnTestHelper
 
 describe "Beer" do
   let!(:brewery) { FactoryGirl.create :brewery, name: "Koff" }
+  let!(:style) { FactoryGirl.create :style, style: "Weizen" }
 
   before :each do
     FactoryGirl.create :user

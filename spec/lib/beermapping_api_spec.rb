@@ -63,3 +63,4 @@ describe "BeermappingApi" do
       expect(places.size).to eq(3)
     end
   end
+end
