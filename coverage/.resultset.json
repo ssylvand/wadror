@@ -718,6 +718,14 @@
         1,
         null,
         1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        1,
         4,
         7,
         null,
@@ -752,12 +760,17 @@
         1,
         null,
         1,
-        5,
+        0,
         null,
         null
       ],
       "/Users/samusylvander/Source/Ruby/ratebeer/app/controllers/places_controller.rb": [
         1,
+        1,
+        null,
+        1,
+        null,
+        null,
         1,
         null,
         null,
@@ -767,6 +780,14 @@
         1,
         null,
         2,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
         null,
         null
       ],
@@ -812,6 +833,6 @@
         null
       ]
     },
-    "timestamp": 1424036405
+    "timestamp": 1424039847
   }
 }

@@ -1,5 +1,13 @@
 class BeermappingApi
 
+  def self.place(id)
+    url = "http://beermapping.com/webservice/locquery/#{key}/"
+    response = HTTParty.get "#{url}#{ERB::Util.url_encode(id)}"
+    place = response.parsed_response["bmp_locations"]["location"]
+    return [] if place.is_a?(Hash) and place['id'].nil?
+    return Place.new(place)
+  end
+
   def self.places_in(city)
     city = city.downcase
     Rails.cache.fetch(city, expires_in: 10.weeks) { fetch_places_in(city) }
