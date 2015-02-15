@@ -6,12 +6,13 @@ class Brewery < ActiveRecord::Base
 
   validates :name, presence: true
   validates :year, numericality: { greater_than_or_equal_to: 1042,
-                                    only_integer: true }
-  validate :year_cannot_be_in_future
+                                    only_integer: true,
+                                    less_than_or_equal_to: ->(_){Time.now.year}}
+  #validate :year_cannot_be_in_future
 
-  def year_cannot_be_in_future
-    if (year > Date.today.year)
-      errors.add(:year, "can't be in the future")
-    end
-  end
+  #def year_cannot_be_in_future
+  #  if (year > Date.today.year)
+  #    errors.add(:year, "can't be in the future")
+  #  end
+  #end
 end
