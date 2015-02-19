@@ -9,7 +9,7 @@ describe "Ratings page" do
 
   it "should not have any before been created" do
     visit ratings_path
-    expect(page).to have_content 'Listing ratings'
+    expect(page).to have_content 'All ratings'
     expect(page).to have_content 'Number of ratings: 0'
   end
   describe "when ratings exist" do

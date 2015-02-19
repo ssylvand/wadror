@@ -1,9 +1,91 @@
-<p id="notice"><%= notice %></p>
+<h1>Rating statistics</h1>
+<div class="row">
+  <div class="col-md-4">
+    <h3>Best beers</h3>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th></th>
+        <th>average</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @top_beers.each do |beer| %>
+          <tr>
+            <td><%= beer %></td>
+            <td><%= round(beer.average_rating) %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <h3>Best breweries</h3>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th></th>
+        <th>average</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @top_breweries.each do |brewery| %>
+          <tr>
+            <td><%= brewery.name %></td>
+            <td><%= round(brewery.average_rating) %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <h3>Best styles</h3>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th></th>
+        <th>average</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @top_styles.each do |style| %>
+          <tr>
+            <td><%= style.style %></td>
+            <td><%= round(style.average_rating) %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<h1>Listing ratings</h1>
+</div>
+<h3>Most active users</h3>
+<div class="row">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th></th>
+      <th>favorite beer</th>
+      <th>preferred style</th>
+      <th>favorite brewery</th>
+      <th>ratings</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @top_raters.each do |rater| %>
+        <tr>
+          <td><%= rater.username %></td>
+          <td><%= rater.favorite_beer %></td>
+          <td><%= rater.favorite_style %></td>
+          <td><%= rater.favorite_brewery %></td>
+          <td><%= rater.ratings.count %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<h2>Recent ratings</h2>
+<%= render 'list', ratings: @recent_ratings %>
+<h2>All ratings</h2>
 <p> Number of ratings: <%= @ratings.count %> </p>
-<ul>
-  <% @ratings.each do |rating| %>
-      <li><%= rating %> <%= link_to rating.user.username, rating.user %></li>
-<% end %>
-</ul>
+<%= render 'list', ratings: @ratings %>

@@ -2,10 +2,13 @@
 
 <h2>
   <%= @user.username %>
+  <% if @user.blocked && current_user.admin %>
+      <span class="label label-info">account frozen</span>
+  <% end %>
 </h2>
 
 <p>
-  has made <%= pluralize(@user.ratings.count, 'rating', 'ratings') %>, average <%= @user.average_rating %>
+  has made <%= pluralize(@user.ratings.count, 'rating', 'ratings') %>, average <%= round(@user.average_rating) %>
   <% if @user.ratings.count > 0 %>
     <p>
       Favorite style: <%= @user.favorite_style.style %>
@@ -29,17 +32,33 @@
 <% end %>
 
 <strong>Ratings</strong>
-<ul>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Rating</th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
+  <tbody>
   <% @user.ratings.each do |rating| %>
-      <li>
-        <%= rating %>
-        <% if @user == current_user %>
-            <%= link_to 'delete', rating, method: :delete, data: {confirm: 'Are you sure?'} %></li>
-        <% end %>
+      <tr>
+        <td><%= rating %></td>
+        <td>
+          <% if @user == current_user %>
+              <%= link_to 'delete', rating, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %></li>
+          <% end %>
+        </td>
+      </tr>
   <% end %>
-</ul>
-<% if @user == current_user %>
-    <%= link_to 'Destroy', @user, method: :delete, data: {confirm: 'Are you sure?'} %> |
-    <%= link_to 'Edit', edit_user_path(@user) %> |
+  </tbody>
+</table>
+<% if current_user.admin %>
+    <% if @user.blocked %>
+        <%= link_to "reactivate account", toggle_blocked_user_path(@user.id), method: :post, class: "btn btn-primary" %>
+    <% else %>
+        <%= link_to "freeze account", toggle_blocked_user_path(@user.id), method: :post, class: "btn btn-primary" %>
+    <% end %>
 <% end %>
-<%= link_to 'Back', users_path %>
+<% if @user == current_user %>
+    <%= edit_and_destroy_buttons(@user) %>
+<% end %>

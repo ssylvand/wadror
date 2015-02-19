@@ -23,6 +23,14 @@ Rails.application.routes.draw do
   delete 'signout', to: 'sessions#destroy'
 
   post 'places', to:'places#search'
+
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+
+  resources :users do
+    post 'toggle_blocked', on: :member
+  end
   # get 'kaikki_bisset', to: 'beers#index'
   # get 'ratings', to: 'ratings#index'
   # get 'ratings/new', to:'ratings#new'

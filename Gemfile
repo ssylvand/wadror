@@ -32,6 +32,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 gem 'httparty'
+gem 'bootstrap-sass'
 
 # Use sqlite3 as the database for Active Record
 group :development, :test do
@@ -67,3 +68,6 @@ group :test do
   gem 'webmock'
 end
 
+group :development do
+  gem 'rails_layout'
+end

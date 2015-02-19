@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_that_admin, only: [:toggle_blocked]
 
   # GET /users
   # GET /users.json
@@ -67,6 +68,14 @@ class UsersController < ApplicationController
         format.json { head :no_content }
       end
     end
+  end
+
+  def toggle_blocked
+    user = User.find(params[:id])
+    user.update_attribute :blocked, (not user.blocked)
+
+    notice = user.blocked? ? "User account frozen" : "User account activated"
+    redirect_to :back, notice: notice
   end
 
   private
