@@ -23,7 +23,10 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to user_path(user), notice: "Welcome back!"
     end
-
+  else
+    if user.blocked
+      redirect_to :back, notice: "Your account is frozen, please contact admin"
+    end
   end
 
   def destroy

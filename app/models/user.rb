@@ -23,9 +23,10 @@ class User < ActiveRecord::Base
   def self.find_or_create_with_auth_hash(auth_hash)
     @user = User.find_by username: auth_hash.info.name
     if @user == nil
-      generated_password = SecureRandom.uuid
-      @user = User.new username: auth_hash.info.name, password: generated_password, password_confirmation: generated_password
+      generated_password = SecureRandom.uuid.upcase
+      @user = User.new username: auth_hash.info.name, password: generated_password, password_confirmation: generated_password, admin: false, blocked: false
       @user.save
+
     end
     return @user
   end
