@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :beer_clubs, through: :memberships
 
   validates :username, uniqueness: true,
-            length: {in: 3..15}
+            length: {in: 3..50}
 
   validates :password, length: {minimum: 4}
 
@@ -18,6 +18,16 @@ class User < ActiveRecord::Base
   def self.top(n)
     sorted_by_number_of_ratings_in_desc_order = User.all.sort_by{ |u| -(u.ratings.count||0) }
     return sorted_by_number_of_ratings_in_desc_order.take(n)
+  end
+
+  def self.find_or_create_with_auth_hash(auth_hash)
+    @user = User.find_by username: auth_hash.info.name
+    if @user == nil
+      generated_password = SecureRandom.uuid
+      @user = User.new username: auth_hash.info.name, password: generated_password, password_confirmation: generated_password
+      @user.save
+    end
+    return @user
   end
 
   def favorite(category)

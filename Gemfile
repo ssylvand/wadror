@@ -33,6 +33,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'httparty'
 gem 'bootstrap-sass'
+gem 'jquery-turbolinks'
+gem 'rack-mini-profiler'
+gem 'omniauth-github'
 
 # Use sqlite3 as the database for Active Record
 group :development, :test do
@@ -66,6 +69,8 @@ group :test do
   gem 'rspec-its'
   gem 'simplecov', require: false
   gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 group :development do

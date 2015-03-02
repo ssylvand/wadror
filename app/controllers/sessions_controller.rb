@@ -17,6 +17,15 @@ class SessionsController < ApplicationController
     end
   end
 
+  def create_oauth
+    user = User.find_or_create_with_auth_hash(request.env['omniauth.auth'])
+    if user && user.blocked != true
+      session[:user_id] = user.id
+      redirect_to user_path(user), notice: "Welcome back!"
+    end
+
+  end
+
   def destroy
     # nollataan sessio
     session[:user_id] = nil
